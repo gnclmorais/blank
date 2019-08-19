@@ -56,5 +56,9 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
-  }
+  },
+  serverMiddleware: [
+    // '~/api/pocket.js',
+    // { path: '/pocket', handler: '~/serverMiddleware/pocket.js' }
+  ]
 }

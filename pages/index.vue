@@ -9,6 +9,11 @@
         Empty all your lists.
       </h2>
       <div class="links">
+        <nuxt-link class="button--green" to="/pocket">Pocket</nuxt-link>
+
+        <br />
+        <br />
+
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">
           Documentation
         </a>
