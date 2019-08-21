@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const axios = require('axios')
 
 // debug route
 // TODO: Remove?
@@ -17,6 +18,26 @@ router.get('/', (req, res, next) => {
     response = {}
   }
   res.json(response)
+})
+
+router.get('/retrieve', async (req, res, next) => {
+  axios.get('https://getpocket.com/v3/get', {
+    params: {
+      consumer_key: process.env.POCKET_API_KEY,
+      access_token: req.session.grant.response.access_token,
+      state: 'unread',
+      detailType: 'simple'
+    }
+  })
+  .then(function(pockets) {
+    res.setHeader("Content-Type", "application/json");
+    res.send(JSON.stringify(pockets.data.list));
+  })
+  .catch(function(error) {
+    res.setHeader("Content-Type", "application/json");
+    console.log(error);
+    res.send(JSON.stringify(error));
+  });
 })
 
 // where pocket redirects to after connecting

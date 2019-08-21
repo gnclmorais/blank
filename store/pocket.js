@@ -1,7 +1,8 @@
 export const state = () => ({
   loggedIn: false,
   consumerKey: undefined,
-  accessToken: undefined
+  accessToken: undefined,
+  articles: {}
 })
 
 export const mutations = {
@@ -9,7 +10,8 @@ export const mutations = {
     state.consumerKey = consumerKey
     state.accessToken = accessToken
     state.loggedIn = !!(consumerKey && accessToken)
+  },
+  setArticles(state, articles) {
+    state.articles = articles
   }
 }
-
-export const actions = {}
