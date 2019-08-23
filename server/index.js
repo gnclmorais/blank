@@ -65,6 +65,10 @@ app.use(grant);
 //   }
 // });
 
+// Enable parsing and responding in json
+app.use(bodyParser.json()) // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
+
 const pocketRoutes = require('../api/pocket')
 app.use('/api/pocket', pocketRoutes)
 
@@ -84,9 +88,6 @@ async function start() {
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
-
-  // Enable parsing and responding in json
-  app.use(bodyParser.json());
 
   const routes = app._router.stack
     .filter((middleware) => middleware.route)

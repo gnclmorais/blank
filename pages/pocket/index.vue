@@ -14,7 +14,12 @@
         <a v-if="!loggedIn" href="/connect/getpocket" class="button">
           connect app to Pocket
         </a>
-        <span v-else v-text="numberUnreadArticlesMessage" />
+        <div v-else>
+          <span v-text="numberUnreadArticlesMessage" />
+          <button @click="deletePockets">
+            Delete all
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -77,6 +82,13 @@ export default {
         .finally(function() {
           loadingService.close()
         })
+    },
+    deletePockets() {
+      const items = Object.keys(this.pockets)
+
+      Axios.post('/api/pocket/clean', { items }).then((stuff) => {
+        console.log('stuff:', stuff)
+      })
     }
   }
 }
