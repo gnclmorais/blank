@@ -16,7 +16,7 @@
         </a>
         <div v-else>
           <span v-text="numberUnreadArticlesMessage" />
-          <button @click="deletePockets">
+          <button @click="deletePockets" v-show="numberUnreadArticles">
             Delete all
           </button>
         </div>
@@ -27,12 +27,14 @@
 
 <script>
 import { Loading } from 'element-ui'
+// import { Notification } from 'element-ui';
 import Axios from 'axios'
-// import { mapMutations } from 'vuex'
 
 import Logo from '~/components/Logo.vue'
 
 const keys = (obj) => Object.keys(obj).length
+
+const pluralize = (nr, str) => `${nr} ${str}${nr !== 1 ? 's' : ''}`
 
 export default {
   components: {
@@ -51,7 +53,10 @@ export default {
       return keys(this.pockets)
     },
     numberUnreadArticlesMessage() {
-      return `You have ${this.numberUnreadArticles} articles on your Pocket`
+      return this.numberUnreadArticles > 0 ? `You have ${pluralize(
+        this.numberUnreadArticles,
+        'article'
+      )} on your Pocket` : ''
     }
   },
   mounted() {
@@ -64,6 +69,10 @@ export default {
     }
   },
   methods: {
+    setPocketArticles(data) {
+      this.pockets = data
+      this.$store.commit('pocket/setArticles', data)
+    },
     loadPocketInfo() {
       const loadingService = Loading.service({
         lock: true,
@@ -72,12 +81,15 @@ export default {
       })
 
       Axios.get('/api/pocket/retrieve')
-        .then(({ config, data, headers, request, status, statusText }) => {
-          this.pockets = data
-          this.$store.commit('pocket/setArticles', data)
-        })
-        .catch(function(error) {
-          console.log(error)
+        .then(({ data }) => this.setPocketArticles(data))
+        .catch(({ response }) => {
+          const errorMessage = response.data || 'Error — try again later'
+
+          this.$notify.error({
+            title: 'Error',
+            message: errorMessage,
+            position: 'top-left'
+          })
         })
         .finally(function() {
           loadingService.close()
@@ -86,9 +98,48 @@ export default {
     deletePockets() {
       const items = Object.keys(this.pockets)
 
-      Axios.post('/api/pocket/clean', { items }).then((stuff) => {
-        console.log('stuff:', stuff)
-      })
+      Axios.post('/api/pocket/clean', { items })
+        .then(({ data }) => {
+          const {
+            action_errors, // eslint-disable-line camelcase
+            action_results, // eslint-disable-line camelcase
+            status
+          } = data
+
+          if (status === 1) {
+            this.$notify({
+              title: 'Success',
+              message: `${pluralize(action_results.length, 'article')} removed`,
+              type: 'success'
+            })
+
+            this.setPocketArticles({})
+          } else {
+            const nrRemoved = action_results.filter((result) => result).length
+            const nrErrored = action_errors.filter((result) => result).length
+
+            this.$notify.info({
+              title: 'Info',
+              message: `${pluralize(
+                nrRemoved,
+                'article'
+              )} removed but ${pluralize(
+                nrErrored,
+                'article'
+              )} could not be removed`,
+              position: 'top-left'
+            })
+          }
+        })
+        .catch(({ response }) => {
+          const errorMessage = response.data || 'Error — try again later'
+
+          this.$notify.error({
+            title: 'Error',
+            message: errorMessage,
+            position: 'top-left'
+          })
+        })
     }
   }
 }
