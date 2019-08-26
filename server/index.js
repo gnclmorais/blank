@@ -35,7 +35,7 @@ app.use(
 const grant = new Grant({
   server: {
     protocol: 'http',
-    host: process.env.HOST || 'localhost:3000',
+    host: process.env.GRANT_HOST || 'localhost:3000',
     callback: '/api/pocket/callback',
     transport: 'session'
   },
