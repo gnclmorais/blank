@@ -27,6 +27,11 @@ export default {
 </script>
 
 <style>
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
 }

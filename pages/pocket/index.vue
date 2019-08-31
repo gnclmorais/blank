@@ -1,28 +1,34 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        Blank.
-      </h1>
-      <h2 class="subtitle">
-        Pocket
-      </h2>
-      <div>
-        You are in the Pocket page.
-        <br />
-        <a v-if="!loggedIn" href="/connect/getpocket" class="button">
-          connect app to Pocket
-        </a>
-        <div v-else>
-          <span v-text="numberUnreadArticlesMessage" />
-          <button @click="deletePockets" v-show="numberUnreadArticles">
-            Delete all
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <el-container>
+    <el-main>
+      <el-row type="flex" justify="center">
+        <el-col :span="6">
+          <logo />
+
+          <h1 class="title">
+            Blank.
+          </h1>
+          <h2 class="subtitle">
+            Pocket
+          </h2>
+
+          <div>
+            You are in the Pocket page.
+            <br />
+            <a v-if="!loggedIn" href="/connect/getpocket" class="button">
+              connect app to Pocket
+            </a>
+            <div v-else>
+              <span v-text="numberUnreadArticlesMessage" />
+              <button @click="deletePockets" v-show="numberUnreadArticles">
+                Delete all
+              </button>
+            </div>
+          </div>
+        </el-col>
+      </el-row>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
