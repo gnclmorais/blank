@@ -1,41 +1,29 @@
 <template>
-  <section>
+  <section class="u-align-center">
     <logo />
 
-    <h1 class="title">
+    <h1 class="title u-margin-bottom-0">
       Blank.
     </h1>
 
-    <h2 class="subtitle">
-      Empty all your lists.
-    </h2>
+    <h3 class="subtitle">
+      Empty all your lists
+    </h3>
 
     <div class="links">
-      <p>Available integrations:</p>
-      <ul>
+      <p class="available-msg">Available integrations:</p>
+      <ul class="u-ul-reset button-list">
         <li>
-          <el-link type="primary" href="/pocket">
+          <nuxt-link to="/pocket" class="button u-full-width">
             Pocket
-            <i class="el-icon-right" />
-          </el-link>
+          </nuxt-link>
         </li>
         <li>
-          <el-link type="info" href="/">
-            Tell us the next integration to build
-            <i class="el-icon-right" />
-          </el-link>
+          <nuxt-link to="/pocket" class="button u-full-width">
+            Pick the next one
+          </nuxt-link>
         </li>
       </ul>
-      <nuxt-link to="/pocket">
-        <el-button>
-          Pocket
-          <i class="el-icon-right" />
-        </el-button>
-      </nuxt-link>
-      <el-button>
-        Missing an integration?
-        <i class="el-icon-right" />
-      </el-button>
     </div>
   </section>
 </template>
@@ -44,6 +32,7 @@
 import Logo from '~/components/Logo.vue'
 
 export default {
+  layout: 'landing',
   components: {
     Logo
   }
@@ -51,5 +40,20 @@ export default {
 </script>
 
 <style>
+.title {
+}
 
+.links {
+  margin-top: 5rem;
+}
+
+.available-msg {
+  margin-bottom: 1rem;
+}
+
+.button-list {
+  list-style-type: none;
+  margin: 0 auto;
+  max-width: 20rem;
+}
 </style>

@@ -12,3 +12,48 @@
 body {
   font-family: "system";
 }
+
+
+/**
+ * Global styling
+ */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+
+/* Components */
+
+.hero {
+  align-items: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-body {
+  flex-grow: 1;
+  flex-shrink: 0;
+  padding: 3rem 1.5rem;
+}
+
+
+/* Utilities */
+
+.u-align-center {
+  text-align: center;
+}
+
+.u-ul-reset {
+  list-style-type: none;
+}
+
+.u-margin-bottom-0 {
+  margin-bottom: 0;
+}

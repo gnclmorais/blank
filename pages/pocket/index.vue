@@ -1,37 +1,44 @@
 <template>
-  <section>
-    <h1 class="title">
-      Blank.
-    </h1>
-    <h2 class="subtitle">
-      Pocket
-    </h2>
+  <div>
+    <section class="u-align-center hero">
+      <div class="hero-body">
+        <h1 class="title">
+          Pocket
+        </h1>
+        <a href="https://getpocket.com">app.getpocket.com</a>
+      </div>
+    </section>
 
-    <div>
-      <a v-if="!loggedIn" href="/connect/getpocket">
-        Connect app to Pocket
-      </a>
-      <div v-else-if="loading">
-        <Loader />
-        Counting your unread articles from Pocket…
+    <section class="u-align-center">
+      <div>
+        <div v-if="!loggedIn">
+          <p class="u-margin-bottom-0">You need to log in first</p>
+          <a href="/connect/getpocket" class="button">
+            Connect to Pocket
+          </a>
+        </div>
+        <div v-else-if="loading">
+          <Loader />
+          <p>Counting your unread articles from Pocket…</p>
+        </div>
+        <div v-else-if="successMessage">
+          Success!
+          <span v-text="successMessage" />
+          No more unread articles on Pocket 😌
+        </div>
+        <div v-else-if="errorMessage">
+          Error:
+          <span v-text="errorMessage" />
+        </div>
+        <div v-else>
+          <p class="u-margin-bottom-0" v-html="numberUnreadArticlesMessage" />
+          <button @click="deletePockets" v-show="numberUnreadArticles">
+            Delete all
+          </button>
+        </div>
       </div>
-      <div v-else-if="successMessage">
-        Success!
-        <span v-text="successMessage" />
-        No more unread articles on Pocket 😌
-      </div>
-      <div v-else-if="errorMessage">
-        Error:
-        <span v-text="errorMessage" />
-      </div>
-      <div v-else>
-        <span v-text="numberUnreadArticlesMessage" />
-        <button @click="deletePockets" v-show="numberUnreadArticles">
-          Delete all
-        </button>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -63,10 +70,10 @@ export default {
       return keys(this.pockets)
     },
     numberUnreadArticlesMessage() {
-      return this.numberUnreadArticles > 0 ? `You have ${pluralize(
+      return this.numberUnreadArticles > 0 ? `You have <strong>${pluralize(
         this.numberUnreadArticles,
         'article'
-      )} on your Pocket` : ''
+      )}</strong> on your Pocket account` : 'Your account is empty!'
     }
   },
   mounted() {
@@ -134,4 +141,5 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+</style>
