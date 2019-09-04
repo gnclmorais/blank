@@ -5,14 +5,14 @@
         <h1 class="hero-title">
           Pocket
         </h1>
-        <a href="https://getpocket.com">app.getpocket.com</a>
+        <a href="https://getpocket.com">getpocket.com →</a>
       </div>
     </section>
 
     <section class="">
       <div>
         <div v-if="!loggedIn">
-          <p class="u-margin-bottom-0">You need to log in first</p>
+          <p class="">You need to log in first</p>
           <a href="/connect/getpocket" class="button">
             Connect to Pocket
           </a>
@@ -31,7 +31,7 @@
           <span v-text="errorMessage" />
         </div>
         <div v-else>
-          <p class="u-margin-bottom-0" v-html="numberUnreadArticlesMessage" />
+          <p class="" v-html="numberUnreadArticlesMessage" />
           <button @click="deletePockets" v-show="numberUnreadArticles">
             Delete all
           </button>
@@ -69,11 +69,13 @@ export default {
     numberUnreadArticles() {
       return keys(this.pockets)
     },
+    numberUnreadArticlesString() {
+      return pluralize(this.numberUnreadArticles, 'article')
+    },
     numberUnreadArticlesMessage() {
-      return this.numberUnreadArticles > 0 ? `You have <strong>${pluralize(
-        this.numberUnreadArticles,
-        'article'
-      )}</strong> on your Pocket account` : 'Your account is empty!'
+      return this.numberUnreadArticles > 0 ? `You have <strong>${
+        this.numberUnreadArticlesString
+      }</strong> on your Pocket account` : 'Your account is empty!'
     }
   },
   mounted() {
@@ -104,6 +106,11 @@ export default {
         })
     },
     deletePockets() {
+      const confirmDelete = confirm(`
+        Are you sure you want to delete ${this.numberUnreadArticlesString}?
+      `)
+      if (!confirmDelete) return;
+
       const items = Object.keys(this.pockets)
 
       Axios.post('/api/pocket/clean', { items })

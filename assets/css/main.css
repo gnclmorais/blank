@@ -40,7 +40,7 @@ body {
 .hero-body {
   flex-grow: 1;
   flex-shrink: 0;
-  padding: 3rem 0;
+  padding: 3rem 0 6rem;
 }
 
 .hero-title {
