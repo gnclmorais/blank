@@ -2,7 +2,7 @@
   <div>
     <section class="hero">
       <div class="hero-body">
-        <h1 class="title">
+        <h1 class="hero-title">
           About
         </h1>
       </div>

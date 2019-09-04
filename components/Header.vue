@@ -5,6 +5,9 @@
     </nuxt-link>
     <span class="u-line-through tagline">Empty all your lists</span>
 
+    <a href="http://github.com/gnclmorais/blank" class="header-link u-pull-right">
+      Github.
+    </a>
     <nuxt-link to="/about" class="header-link u-pull-right">
       About.
     </nuxt-link>
@@ -22,6 +25,9 @@
 }
 .header-link:hover {
   text-decoration: underline;
+}
+.header-link + .header-link {
+  margin-right: 2rem;
 }
 
 .tagline {

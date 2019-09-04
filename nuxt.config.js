@@ -26,6 +26,7 @@ module.exports = {
   css: [
     '@/assets/css/Barebones/css/normalize.css',
     '@/assets/css/Barebones/css/barebones.css',
+    '@/assets/css/icomoon/style.css',
     '@/assets/css/main.css'
   ],
   /*

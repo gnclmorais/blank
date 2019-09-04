@@ -1,15 +1,15 @@
 <template>
   <div>
-    <section class="u-align-center hero">
+    <section class="hero">
       <div class="hero-body">
-        <h1 class="title">
+        <h1 class="hero-title">
           Pocket
         </h1>
         <a href="https://getpocket.com">app.getpocket.com</a>
       </div>
     </section>
 
-    <section class="u-align-center">
+    <section class="">
       <div>
         <div v-if="!loggedIn">
           <p class="u-margin-bottom-0">You need to log in first</p>

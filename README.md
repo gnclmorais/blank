@@ -2,6 +2,7 @@
 
 > Empty all your lists.
 
+
 ## Build Setup
 
 ``` bash
@@ -25,4 +26,5 @@ check out [Nuxt.js docs](https://nuxtjs.org).
 
 ## Resources
 
-- [pocket-auth](https://pocket-auth.glitch.me)
+- Inspired by [pocket-auth](https://pocket-auth.glitch.me)
+- Icons from [IcoMoon](https://icomoon.io)

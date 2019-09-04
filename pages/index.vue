@@ -1,5 +1,5 @@
 <template>
-  <section class="u-align-center">
+  <section class="">
     <logo />
 
     <h1 class="title u-margin-bottom-0">
@@ -14,12 +14,14 @@
       <p class="available-msg">Available integrations:</p>
       <ul class="u-ul-reset button-list">
         <li>
-          <nuxt-link to="/pocket" class="button u-full-width">
+          <nuxt-link to="/pocket" class="button">
+            <i class="icon-get-pocket"></i>
             Pocket
           </nuxt-link>
         </li>
         <li>
-          <a href="https://airtable.com/shrKTzukHagJMNFmZ" class="button u-full-width" target="_blank">
+          <a href="https://airtable.com/shrKTzukHagJMNFmZ" class="button" target="_blank">
+            <i class="icon-comment"></i>
             Pick the next one
           </a>
         </li>
@@ -32,7 +34,6 @@
 import Logo from '~/components/Logo.vue'
 
 export default {
-  layout: 'landing',
   components: {
     Logo
   }
@@ -53,7 +54,5 @@ export default {
 
 .button-list {
   list-style-type: none;
-  margin: 0 auto;
-  max-width: 20rem;
 }
 </style>

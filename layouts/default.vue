@@ -7,21 +7,15 @@
     <main>
       <nuxt />
     </main>
-
-    <footer>
-      <Footer />
-    </footer>
   </div>
 </template>
 
 <script>
 import Header from '~/components/Header.vue'
-import Footer from '~/components/Footer.vue'
 
 export default {
   components: {
-    Header,
-    Footer
+    Header
   }
 }
 </script>
@@ -29,7 +23,7 @@ export default {
 <style>
 .layout {
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 750px;
   padding-left: 20px;
   padding-right: 20px;
 }

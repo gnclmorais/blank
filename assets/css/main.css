@@ -43,6 +43,10 @@ body {
   padding: 3rem 0;
 }
 
+.hero-title {
+  margin-bottom: .5rem;
+}
+
 
 /* Utilities */
 
