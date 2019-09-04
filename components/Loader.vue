@@ -3,6 +3,7 @@
 </template>
 
 <style>
+  /* Code from https://loading.io/css/ */
   .lds-ellipsis {
     display: inline-block;
     position: relative;
