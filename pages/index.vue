@@ -19,9 +19,9 @@
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/pocket" class="button u-full-width">
+          <a href="https://airtable.com/shrKTzukHagJMNFmZ" class="button u-full-width" target="_blank">
             Pick the next one
-          </nuxt-link>
+          </a>
         </li>
       </ul>
     </div>

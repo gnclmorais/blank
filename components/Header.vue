@@ -1,9 +1,13 @@
 <template>
   <div class="header">
-    <nuxt-link to="/" class="home">
+    <nuxt-link to="/" class="header-link">
       <strong>Blank.</strong>
     </nuxt-link>
-    Empty all your lists
+    <span class="u-line-through tagline">Empty all your lists</span>
+
+    <nuxt-link to="/about" class="header-link u-pull-right">
+      About.
+    </nuxt-link>
   </div>
 </template>
 
@@ -12,11 +16,15 @@
   line-height: 6rem; /* 6 * 10px = 60px */
 }
 
-.home {
+.header-link {
   color: inherit;
   text-decoration: none;
 }
-.home:hover {
+.header-link:hover {
   text-decoration: underline;
+}
+
+.tagline {
+  opacity: .5;
 }
 </style>
