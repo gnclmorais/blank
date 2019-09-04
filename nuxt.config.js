@@ -23,7 +23,11 @@ module.exports = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '@/assets/css/Barebones/css/normalize.css',
+    '@/assets/css/Barebones/css/barebones.css',
+    '@/assets/css/main.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
