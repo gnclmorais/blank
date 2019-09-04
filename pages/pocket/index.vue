@@ -1,42 +1,43 @@
 <template>
-  <el-container>
-    <el-main>
-      <el-row type="flex" justify="center">
-        <el-col :span="6">
-          <logo />
+  <section>
+    <h1 class="title">
+      Blank.
+    </h1>
+    <h2 class="subtitle">
+      Pocket
+    </h2>
 
-          <h1 class="title">
-            Blank.
-          </h1>
-          <h2 class="subtitle">
-            Pocket
-          </h2>
-
-          <div>
-            You are in the Pocket page.
-            <br />
-            <a v-if="!loggedIn" href="/connect/getpocket" class="button">
-              connect app to Pocket
-            </a>
-            <div v-else>
-              <span v-text="numberUnreadArticlesMessage" />
-              <button @click="deletePockets" v-show="numberUnreadArticles">
-                Delete all
-              </button>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-    </el-main>
-  </el-container>
+    <div>
+      <a v-if="!loggedIn" href="/connect/getpocket">
+        Connect app to Pocket
+      </a>
+      <div v-else-if="loading">
+        <Loader />
+        Counting your unread articles from Pocket…
+      </div>
+      <div v-else-if="successMessage">
+        Success!
+        <span v-text="successMessage" />
+        No more unread articles on Pocket 😌
+      </div>
+      <div v-else-if="errorMessage">
+        Error:
+        <span v-text="errorMessage" />
+      </div>
+      <div v-else>
+        <span v-text="numberUnreadArticlesMessage" />
+        <button @click="deletePockets" v-show="numberUnreadArticles">
+          Delete all
+        </button>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import { Loading } from 'element-ui'
-// import { Notification } from 'element-ui';
 import Axios from 'axios'
 
-import Logo from '~/components/Logo.vue'
+import Loader from '~/components/Loader.vue'
 
 const keys = (obj) => Object.keys(obj).length
 
@@ -44,11 +45,14 @@ const pluralize = (nr, str) => `${nr} ${str}${nr !== 1 ? 's' : ''}`
 
 export default {
   components: {
-    Logo
+    Loader
   },
   data() {
     return {
-      pockets: {}
+      pockets: {},
+      loading: false,
+      successMessage: undefined,
+      errorMessage: undefined
     }
   },
   computed: {
@@ -80,25 +84,16 @@ export default {
       this.$store.commit('pocket/setArticles', data)
     },
     loadPocketInfo() {
-      const loadingService = Loading.service({
-        lock: true,
-        text: 'Counting your Pocket articles…',
-        spinner: 'el-icon-loading'
-      })
+      this.loading = true
+      this.errorMessage = undefined
 
       Axios.get('/api/pocket/retrieve')
         .then(({ data }) => this.setPocketArticles(data))
         .catch(({ response }) => {
-          const errorMessage = response.data || 'Error — try again later'
-
-          this.$notify.error({
-            title: 'Error',
-            message: errorMessage,
-            position: 'top-left'
-          })
+          this.errorMessage = response.data || 'Error — try again later'
         })
-        .finally(function() {
-          loadingService.close()
+        .finally(() => {
+          this.loading = false
         })
     },
     deletePockets() {
@@ -113,38 +108,26 @@ export default {
           } = data
 
           if (status === 1) {
-            this.$notify({
-              title: 'Success',
-              message: `${pluralize(action_results.length, 'article')} removed`,
-              type: 'success'
-            })
+            this.successMessage = `${
+              pluralize(action_results.length, 'article')
+            } removed`
 
             this.setPocketArticles({})
           } else {
             const nrRemoved = action_results.filter((result) => result).length
             const nrErrored = action_errors.filter((result) => result).length
 
-            this.$notify.info({
-              title: 'Info',
-              message: `${pluralize(
-                nrRemoved,
-                'article'
-              )} removed but ${pluralize(
-                nrErrored,
-                'article'
-              )} could not be removed`,
-              position: 'top-left'
-            })
+            this.successMessage = `${pluralize(
+              nrRemoved,
+              'article'
+            )} removed but ${pluralize(
+              nrErrored,
+              'article'
+            )} could not be removed`
           }
         })
         .catch(({ response }) => {
-          const errorMessage = response.data || 'Error — try again later'
-
-          this.$notify.error({
-            title: 'Error',
-            message: errorMessage,
-            position: 'top-left'
-          })
+          this.errorMessage = response.data || 'Error — try again later'
         })
     }
   }

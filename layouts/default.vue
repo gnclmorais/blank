@@ -1,17 +1,17 @@
 <template>
-  <el-container>
-    <el-header>
+  <div>
+    <header>
       <Header />
-    </el-header>
+    </header>
 
-    <el-main>
+    <main>
       <nuxt />
-    </el-main>
+    </main>
 
-    <el-footer>
+    <footer>
       <Footer />
-    </el-footer>
-  </el-container>
+    </footer>
+  </div>
 </template>
 
 <script>
