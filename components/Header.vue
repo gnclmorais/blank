@@ -3,9 +3,14 @@
     <nuxt-link to="/" class="header-link">
       <strong>Blank.</strong>
     </nuxt-link>
-    <span class="u-line-through tagline">Empty all your lists</span>
+    <span class="u-line-through tagline">
+      Empty all your lists
+    </span>
 
-    <a href="http://github.com/gnclmorais/blank" class="header-link u-pull-right">
+    <a
+      href="http://github.com/gnclmorais/blank"
+      class="header-link u-pull-right"
+    >
       Github.
     </a>
     <nuxt-link to="/about" class="header-link u-pull-right">
@@ -31,6 +36,6 @@
 }
 
 .tagline {
-  opacity: .5;
+  opacity: 0.5;
 }
 </style>

@@ -20,7 +20,7 @@
           </nuxt-link>
         </li>
         <li>
-          <a href="https://airtable.com/shrKTzukHagJMNFmZ" class="button" target="_blank">
+          <a href="airtable" class="button" target="_blank">
             <i class="icon-comment"></i>
             Pick the next one
           </a>
@@ -36,6 +36,11 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  data() {
+    return {
+      airtable: 'https://airtable.com/shrKTzukHagJMNFmZ'
+    }
   },
   transition: 'slide-right'
 }

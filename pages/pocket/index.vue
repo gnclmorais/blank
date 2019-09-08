@@ -13,19 +13,23 @@
       <div>
         <div v-if="!loggedIn">
           <p>You need to log in first</p>
-          <a href="/connect/getpocket"
-             v-text="connectMessage"
-             class="button"
-             @click="updateConnectMessage" />
+          <a
+            href="/connect/getpocket"
+            class="button"
+            @click="updateConnectMessage"
+            v-text="connectMessage"
+          />
         </div>
         <div v-else-if="loading">
-          <p class="u-margin-bottom-0">Counting your unread articles from Pocket…</p>
+          <p class="u-margin-bottom-0">
+            Counting your unread articles from Pocket…
+          </p>
           <Loader />
         </div>
         <div v-else-if="successMessage">
           <p>
             <span v-text="successMessage" />
-            <br>
+            <br />
             Your Pocket account is now <strong>empty</strong>.
           </p>
         </div>
@@ -37,8 +41,11 @@
         </div>
         <div v-else>
           <p v-html="numberUnreadArticlesMessage" />
-          <button v-show="numberUnreadArticles" @click="deletePockets"
-                  v-text="deleteMessage" />
+          <button
+            v-show="numberUnreadArticles"
+            @click="deletePockets"
+            v-text="deleteMessage"
+          />
         </div>
       </div>
     </section>
@@ -79,9 +86,9 @@ export default {
       return pluralize(this.numberUnreadArticles, 'article')
     },
     numberUnreadArticlesMessage() {
-      return this.numberUnreadArticles > 0 ? `You have <strong>${
-        this.numberUnreadArticlesString
-      }</strong> on your Pocket account.` : 'Your account is empty.'
+      return this.numberUnreadArticles > 0
+        ? `You have <strong>${this.numberUnreadArticlesString}</strong> on your Pocket account.`
+        : 'Your account is empty.'
     }
   },
   mounted() {
@@ -118,7 +125,7 @@ export default {
       const confirmDelete = confirm(`
         Are you sure you want to delete ${this.numberUnreadArticlesString}?
       `)
-      if (!confirmDelete) return;
+      if (!confirmDelete) return
 
       this.deleteMessage = 'Cleaning…'
       const items = Object.keys(this.pockets)
@@ -132,9 +139,10 @@ export default {
           } = data
 
           if (status === 1) {
-            this.successMessage = `${
-              pluralize(action_results.length, 'article')
-            } removed!`
+            this.successMessage = `${pluralize(
+              action_results.length,
+              'article'
+            )} removed!`
 
             this.setPocketArticles({})
           } else {
@@ -158,5 +166,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
