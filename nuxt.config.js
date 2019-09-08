@@ -19,7 +19,7 @@ module.exports = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: false,
   /*
    ** Global CSS
    */
@@ -65,5 +65,6 @@ module.exports = {
   serverMiddleware: [
     // '~/api/pocket.js',
     // { path: '/pocket', handler: '~/serverMiddleware/pocket.js' }
-  ]
+  ],
+  pageTransition: 'slide-left'
 }

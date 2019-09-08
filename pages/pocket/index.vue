@@ -12,26 +12,30 @@
     <section class="">
       <div>
         <div v-if="!loggedIn">
-          <p class="">You need to log in first</p>
+          <p>You need to log in first</p>
           <a href="/connect/getpocket" class="button">
             Connect to Pocket
           </a>
         </div>
         <div v-else-if="loading">
+          <p class="u-margin-bottom-0">Counting your unread articles from Pocket…</p>
           <Loader />
-          <p>Counting your unread articles from Pocket…</p>
         </div>
         <div v-else-if="successMessage">
-          Success!
-          <span v-text="successMessage" />
-          No more unread articles on Pocket 😌
+          <p>
+            <span v-text="successMessage" />
+            <br>
+            Your Pocket account is now <strong>empty</strong>.
+          </p>
         </div>
         <div v-else-if="errorMessage">
-          Error:
-          <span v-text="errorMessage" />
+          <p>
+            Error:
+            <span v-text="errorMessage" />
+          </p>
         </div>
         <div v-else>
-          <p class="" v-html="numberUnreadArticlesMessage" />
+          <p v-html="numberUnreadArticlesMessage" />
           <button @click="deletePockets" v-show="numberUnreadArticles">
             Delete all
           </button>
@@ -75,7 +79,7 @@ export default {
     numberUnreadArticlesMessage() {
       return this.numberUnreadArticles > 0 ? `You have <strong>${
         this.numberUnreadArticlesString
-      }</strong> on your Pocket account` : 'Your account is empty!'
+      }</strong> on your Pocket account.` : 'Your account is empty.'
     }
   },
   mounted() {
@@ -124,7 +128,7 @@ export default {
           if (status === 1) {
             this.successMessage = `${
               pluralize(action_results.length, 'article')
-            } removed`
+            } removed!`
 
             this.setPocketArticles({})
           } else {
