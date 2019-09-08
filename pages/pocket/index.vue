@@ -13,9 +13,10 @@
       <div>
         <div v-if="!loggedIn">
           <p>You need to log in first</p>
-          <a href="/connect/getpocket" class="button">
-            Connect to Pocket
-          </a>
+          <a href="/connect/getpocket"
+             v-text="connectMessage"
+             class="button"
+             @click="updateConnectMessage" />
         </div>
         <div v-else-if="loading">
           <p class="u-margin-bottom-0">Counting your unread articles from Pocket…</p>
@@ -36,9 +37,8 @@
         </div>
         <div v-else>
           <p v-html="numberUnreadArticlesMessage" />
-          <button @click="deletePockets" v-show="numberUnreadArticles">
-            Delete all
-          </button>
+          <button v-show="numberUnreadArticles" @click="deletePockets"
+                  v-text="deleteMessage" />
         </div>
       </div>
     </section>
@@ -63,7 +63,9 @@ export default {
       pockets: {},
       loading: false,
       successMessage: undefined,
-      errorMessage: undefined
+      errorMessage: undefined,
+      connectMessage: 'Connect to Pocket',
+      deleteMessage: 'Delete all'
     }
   },
   computed: {
@@ -92,6 +94,9 @@ export default {
     }
   },
   methods: {
+    updateConnectMessage() {
+      this.connectMessage = 'Taking you to Pocket…'
+    },
     setPocketArticles(data) {
       this.pockets = data
       this.$store.commit('pocket/setArticles', data)
@@ -115,6 +120,7 @@ export default {
       `)
       if (!confirmDelete) return;
 
+      this.deleteMessage = 'Cleaning…'
       const items = Object.keys(this.pockets)
 
       Axios.post('/api/pocket/clean', { items })
