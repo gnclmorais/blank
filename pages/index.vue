@@ -1,8 +1,6 @@
 <template>
   <section class="">
-    <logo />
-
-    <h1 class="title u-margin-bottom-0">
+    <h1 class="title brand u-margin-bottom-0">
       Blank.
     </h1>
 
@@ -31,12 +29,7 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
-  },
   data() {
     return {
       airtable: 'https://airtable.com/shrKTzukHagJMNFmZ'
@@ -48,6 +41,11 @@ export default {
 
 <style>
 .title {
+  margin-top: 5rem;
+}
+
+.subtitle {
+  opacity: 0.5;
 }
 
 .links {

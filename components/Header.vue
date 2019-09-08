@@ -1,15 +1,14 @@
 <template>
   <div class="header">
-    <nuxt-link to="/" class="header-link">
-      <strong>Blank.</strong>
-    </nuxt-link>
-    <span class="u-line-through tagline">
+    <nuxt-link to="/" class="header-link brand">Blank.</nuxt-link>
+    <span class="tagline">
       Empty all your lists
     </span>
 
     <a
       href="http://github.com/gnclmorais/blank"
       class="header-link u-pull-right"
+      target="_blank"
     >
       Github.
     </a>
