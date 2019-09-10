@@ -20,20 +20,22 @@
           </p>
         </dd>
 
+        <dt>Will you support more services?</dt>
+        <dd>
+          <p>
+            Maybe.
+            I’m interested in helping people fight their digital clutter,
+            so more integrations are definitely in the roadmap.
+            Tell me which ones I should be focusing on
+            <a href="here">here</a>.
+          </p>
+        </dd>
+
         <dt>Why delete and not archive?</dt>
         <dd>
           <p>
             That is cheating.
             You should only archive the articles you actually read.
-          </p>
-        </dd>
-
-        <dt>Will you support more services?</dt>
-        <dd>
-          <p>
-            Maybe.
-            Tell me which ones I should be focusing on
-            <a href="here">here</a>.
           </p>
         </dd>
       </dl>

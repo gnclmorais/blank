@@ -8,18 +8,26 @@
       Empty all your lists
     </h3>
 
+    <br />
+
+    <p>
+      Lost the hold on your digital lists?
+      <br />
+      Clean them up and start again.
+    </p>
+
     <div class="links">
       <p class="available-msg">Available integrations:</p>
       <ul class="u-ul-reset button-list">
         <li>
           <nuxt-link to="/pocket" class="button">
-            <i class="icon-get-pocket"></i>
+            <i class="icon-get-pocket" />
             Pocket
           </nuxt-link>
         </li>
         <li>
           <a href="airtable" class="button" target="_blank">
-            <i class="icon-comment"></i>
+            <i class="icon-comment" />
             Pick the next one
           </a>
         </li>
