@@ -13,10 +13,17 @@
         <dt>What is this?</dt>
         <dd>
           <p>
-            <strong>Blank.</strong> came from an honest
+            A few months ago, I realised that I had reached
             <a href="https://app.getpocket.com">Pocket</a> “bankruptcy”,
             where I found myself with almost 2000 articles to read.
             At this stage, looking at my list was more of a chore than a joy.
+          </p>
+          <p>
+            The <span class="brand">Blank.</span> project came from an attempt
+            to declutter my overflowing stack of articles.
+            Creating a new account was not an option for me.
+            I just wanted the white space back to start again,
+            more mindful of what add and what I can actually read.
           </p>
         </dd>
 
@@ -27,7 +34,7 @@
             I’m interested in helping people fight their digital clutter,
             so more integrations are definitely in the roadmap.
             Tell me which ones I should be focusing on
-            <a href="here">here</a>.
+            <a href="https://airtable.com/shrKTzukHagJMNFmZ" target="_blank">here</a>.
           </p>
         </dd>
 
@@ -36,6 +43,16 @@
           <p>
             That is cheating.
             You should only archive the articles you actually read.
+          </p>
+        </dd>
+
+        <dt>Who made this?</dt>
+        <dd>
+          <p>
+            Hi! 👋 My name is Gonçalo and you can find me on
+            <a href="https://twitter.com/gnclmorais" target="_blank">Twitter</a>
+            or
+            <a href="https://github.com/gnclmorais" target="_blank">GitHub</a>.
           </p>
         </dd>
       </dl>
@@ -60,8 +77,14 @@ dd {
 
 p {
   margin: 0;
+  text-align: justify;
+  text-justify: inter-word;
 }
 p + p {
   text-indent: 2rem;
+}
+
+a {
+  color: rgb(17, 106, 101);
 }
 </style>

@@ -1,7 +1,7 @@
 {
   "name": "Blank.",
   "version": "1.0.0",
-  "description": "Empty all your lists.",
+  "description": "Empty all your lists",
   "author": "Gonçalo Morais <gnclmorais@gmail.com>",
   "private": true,
   "scripts": {

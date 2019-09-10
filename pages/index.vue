@@ -11,9 +11,9 @@
     <br />
 
     <p>
-      Lost the hold on your digital lists?
-      <br />
-      Clean them up and start again.
+      Lost the hold on your digital lists? Clean them up and start again.
+      <br>
+      Declutter your digital space.
     </p>
 
     <div class="links">

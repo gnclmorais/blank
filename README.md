@@ -1,6 +1,6 @@
 # Blank.
 
-> Empty all your lists.
+> Empty all your lists
 
 
 ## Build Setup
