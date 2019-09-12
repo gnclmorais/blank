@@ -7,6 +7,8 @@ const Grant = require('grant-express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
+require('newrelic')
+
 const app = express()
 
 // Import and Set Nuxt.js options
