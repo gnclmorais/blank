@@ -27,6 +27,12 @@ module.exports = {
    */
   loading: false,
   /*
+   ** Environment variables
+   */
+   env: {
+      rollbarAccessToken: process.env.ROLLBAR_ACCESS_TOKEN,
+   },
+  /*
    ** Global CSS
    */
   css: [
@@ -38,7 +44,9 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    '~/plugins/rollbar'
+  ],
   /*
    ** Nuxt.js dev-modules
    */

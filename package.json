@@ -32,7 +32,8 @@
     "grant-express": "^4.6.2",
     "memorystore": "^1.6.1",
     "newrelic": "^5.11.0",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vue-rollbar": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9",
