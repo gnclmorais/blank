@@ -68,9 +68,10 @@ router.get('/retrieve', async (req, res, next) => {
 
 router.post('/clean', (req, res, next) => {
   try {
-    // TODO: Restore this in order to remove ALL articles
-    // const items = req.body.items
-    const items = req.body.items.slice(0, 1)
+    // `splice` present for testing, so we only delete one article at a time
+    const items = req.body.items
+    // const items = req.body.items.slice(0, 1)
+
     const timestamp = Date.now()
     const actions = items.map((item) => ({
       "action": "delete",
