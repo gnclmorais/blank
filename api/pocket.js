@@ -83,9 +83,7 @@ router.post('/clean', (req, res, next) => {
       process.env.POCKET_API_KEY
     }&access_token=${
       req.session.grant.response.access_token
-    }&actions=${
-      JSON.stringify(actions)
-    }`)
+    }`, { actions })
     .then(function({ data }) {
       res.send(data);
     })
