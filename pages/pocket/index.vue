@@ -140,34 +140,32 @@ export default {
 
       // Requests _can_ be too long, so let's break our article IDs into chunks
       // and create separate requests
-      const chunk = 500
+      const chunk = 100
       const itemSets = chunkArray(items, chunk)
-      const requests = itemSets.map((itemSet) => {
-        return Axios.post('/api/pocket/clean', { items: itemSet })
-      })
 
-      Axios.all(requests)
-        .then(
-          Axios.spread((...responses) => {
-            // Put all responses together
-            return responses.reduce(
-              (acc, { data }) => {
-                const {
-                  action_errors, // eslint-disable-line camelcase
-                  action_results, // eslint-disable-line camelcase
-                  status
-                } = data
+      itemSets
+        .reduce(
+          (accumulatorPromise, itemSet) => {
+            return accumulatorPromise.then((agg) => {
+              return Axios.post('/api/pocket/clean', { items: itemSet }).then(
+                ({ data }) => {
+                  const {
+                    action_errors, // eslint-disable-line camelcase
+                    action_results, // eslint-disable-line camelcase
+                    status
+                  } = data
 
-                acc.actionErrors = acc.actionErrors.concat(action_errors)
-                acc.actionResults = acc.actionResults.concat(action_results)
-                acc.status = acc.status === 1 ? status : acc.status
-              },
-              {
-                actionErrors: [],
-                actionResults: [],
-                status: 1
-              }
-            )
+                  agg.actionErrors = agg.actionErrors.concat(action_errors)
+                  agg.actionResults = agg.actionResults.concat(action_results)
+                  agg.status = agg.status === 1 ? status : agg.status
+                }
+              )
+            })
+          },
+          Promise.resolve({
+            actionErrors: [],
+            actionResults: [],
+            status: 1
           })
         )
         .then(({ data }) => {
@@ -175,14 +173,14 @@ export default {
 
           if (status === 1) {
             this.successMessage = `${pluralize(
-              action_results.length,
+              actionResults.length,
               'article'
             )} removed!`
 
             this.setPocketArticles({})
           } else {
-            const nrRemoved = action_results.filter((result) => result).length
-            const nrErrored = action_errors.filter((result) => result).length
+            const nrRemoved = actionResults.filter((result) => result).length
+            const nrErrored = actionErrors.filter((result) => result).length
 
             this.successMessage = `${pluralize(
               nrRemoved,
