@@ -61,6 +61,14 @@ const keys = (obj) => Object.keys(obj).length
 
 const pluralize = (nr, str) => `${nr} ${str}${nr !== 1 ? 's' : ''}`
 
+const chunkArray = (arr, chunkSize) => {
+  const results = []
+
+  while (arr.length) results.push(arr.splice(0, chunkSize))
+
+  return results
+}
+
 export default {
   components: {
     Loader
@@ -130,13 +138,40 @@ export default {
       this.deleteMessage = 'Cleaning…'
       const items = Object.keys(this.pockets)
 
-      Axios.post('/api/pocket/clean', { items })
+      // Requests _can_ be too long, so let's break our article IDs into chunks
+      // and create separate requests
+      const chunk = 500
+      const itemSets = chunkArray(items, chunk)
+      const requests = itemSets.map((itemSet) => {
+        return Axios.post('/api/pocket/clean', { items: itemSet })
+      })
+
+      Axios.all(requests)
+        .then(
+          Axios.spread((...responses) => {
+            // Put all responses together
+            return responses.reduce(
+              (acc, { data }) => {
+                const {
+                  action_errors, // eslint-disable-line camelcase
+                  action_results, // eslint-disable-line camelcase
+                  status
+                } = data
+
+                acc.actionErrors = acc.actionErrors.concat(action_errors)
+                acc.actionResults = acc.actionResults.concat(action_results)
+                acc.status = acc.status === 1 ? status : acc.status
+              },
+              {
+                actionErrors: [],
+                actionResults: [],
+                status: 1
+              }
+            )
+          })
+        )
         .then(({ data }) => {
-          const {
-            action_errors, // eslint-disable-line camelcase
-            action_results, // eslint-disable-line camelcase
-            status
-          } = data
+          const { actionErrors, actionResults, status } = data
 
           if (status === 1) {
             this.successMessage = `${pluralize(
