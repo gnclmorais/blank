@@ -30,7 +30,7 @@ app.use(
     saveUninitialized: false,
     secret: process.env.SESSION_SECRET
   })
-);
+)
 
 // Set up Grant, our oauth library
 // https://github.com/simov/grant
@@ -42,12 +42,11 @@ const grant = new Grant({
     transport: 'session'
   },
   getpocket: {
-    // TODO: Get these variables
     secret: process.env.SESSION_SECRET,
     key: process.env.POCKET_API_KEY
   }
-});
-app.use(grant);
+})
+app.use(grant)
 
 // app.get('/callback', function(req, res) {
 //   res.send('Yup.')
