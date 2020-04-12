@@ -85,6 +85,7 @@ router.post('/clean', (req, res, next) => {
       req.session.grant.response.access_token
     }`, { actions })
     .then(function({ data }) {
+      console.log('data from request:', data)
       res.send(data);
     })
     .catch(defaultErrorCatch(res))

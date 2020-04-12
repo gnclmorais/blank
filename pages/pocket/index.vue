@@ -140,7 +140,7 @@ export default {
 
       // Requests _can_ be too long, so let's break our article IDs into chunks
       // and create separate requests
-      const chunk = 100
+      const chunk = 200
       const itemSets = chunkArray(items, chunk)
 
       itemSets
