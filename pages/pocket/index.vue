@@ -144,42 +144,39 @@ export default {
       const itemSets = chunkArray(items, chunk)
 
       // https://css-tricks.com/why-using-reduce-to-sequentially-resolve-promises-works
-      itemSets
-        .reduce(
-          (accumulatorPromise, itemSet) => {
-            return accumulatorPromise.then((agg) => {
-              return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  Axios.post('/api/pocket/clean', { items: itemSet }).then(
-                    ({ data }) => {
-                      const {
-                        action_errors, // eslint-disable-line camelcase
-                        action_results, // eslint-disable-line camelcase
-                        status
-                      } = data
+      const result = itemSets.reduce(
+        (accumulatorPromise, itemSet) => {
+          return accumulatorPromise.then((agg) => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                Axios.post('/api/pocket/clean', { items: itemSet }).then(
+                  ({ data }) => {
+                    const {
+                      action_errors, // eslint-disable-line camelcase
+                      action_results, // eslint-disable-line camelcase
+                      status
+                    } = data
 
-                      agg.actionErrors = agg.actionErrors.concat(action_errors)
-                      agg.actionResults = agg.actionResults.concat(
-                        action_results
-                      )
-                      agg.status = agg.status === 1 ? status : agg.status
+                    agg.actionErrors = agg.actionErrors.concat(action_errors)
+                    agg.actionResults = agg.actionResults.concat(action_results)
+                    agg.status = agg.status === 1 ? status : agg.status
 
-                      resolve(agg)
-                    }
-                  )
-                }, 500)
-              })
+                    resolve(agg)
+                  }
+                )
+              }, 500)
             })
-          },
-          Promise.resolve({
-            actionErrors: [],
-            actionResults: [],
-            status: 1
           })
-        )
-        .then(({ data }) => {
-          const { actionErrors, actionResults, status } = data
+        },
+        Promise.resolve({
+          actionErrors: [],
+          actionResults: [],
+          status: 1
+        })
+      )
 
+      result
+        .then(({ actionErrors, actionResults, status }) => {
           if (status === 1) {
             this.successMessage = `${pluralize(
               actionResults.length,
