@@ -12,7 +12,7 @@
 
     <p>
       Lost the hold on your digital lists? Clean them up and start again.
-      <br>
+      <br />
       Declutter your digital space.
     </p>
 
@@ -26,7 +26,7 @@
           </nuxt-link>
         </li>
         <li>
-          <a href="airtable" class="button" target="_blank">
+          <a :href="airtable" class="button" target="_blank">
             <i class="icon-comment" />
             Pick the next one
           </a>
