@@ -3,6 +3,10 @@
 > Empty all your lists
 
 
+> [!NOTE]
+> [Pocket has shut down](https://support.mozilla.org/en-US/kb/future-of-pocket), so I’m marking this project as archived — no longer useful.
+
+
 ## Build Setup
 
 ``` bash
